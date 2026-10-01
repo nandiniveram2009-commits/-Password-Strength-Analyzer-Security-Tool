@@ -146,11 +146,45 @@ No Credential Logging: Flask server logs are configured to exclude input payload
 
 Metadata-Only Analytics: If analytical history is enabled, the SQLite database stores exclusively aggregate statistics (score, classification, length, timestamp), ensuring user privacy is preserved.
 ## Usage
-
+<>Bash
+python backend/app.py
 
 ## API documentation 
 
--
+POST/Api/analyzer
+
+•Request body:
+{
+  "password": "synthetic_test_password",
+  "context": {
+    "name": "John",
+    "year": "1995"
+  }
+}
+•Response:
+{
+  "score": 74,
+  "classification": "STRONG",
+  "findings": ["Contains mixed character diversity."],
+  "suggestions": ["Consider increasing length to 16+ characters."],
+  "metrics": {
+    "length": 14,
+    "unique_character_ratio": 0.85,
+    "entropy_bits": 82.4
+  }
+}
+
+POST/API/generate 
+•Request body:
+{
+  "length": 20
+}
+
+•Response:
+{
+  "generated_password": "K#8mP$2vK!qL8w$z7RtA"
+}
+ 
 ## Security testing 
 
 Static Analysis: Code modularity and separation of concerns prevent accidental exposure of sensitive variables.
